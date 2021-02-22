@@ -2,10 +2,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,6 +24,12 @@ public class LoginServlet extends HttpServlet {
                     "    <a class=\"btn btn-outline-primary\" href=\"register.html\">Sign up</a>\n" +
                     "</header>");
             out.print("Welcome, "+name);
+            out.print("<br><a href='servlet2?name="+name+"'>GO!</a>");
+            //Cookie
+            Cookie cookie = new Cookie("name",name);
+            response.addCookie(cookie);
+
+            //HttpSession
             HttpSession session=request.getSession();
             session.setAttribute("name",name);
         }
